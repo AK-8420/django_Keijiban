@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <title>掲示板</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="headline">
+          <span>みんなの掲示板</span>
+        </h1>
+    </header>
+
+    <p>
+        当掲示板へようこそ。<br>
+        特定の個人や団体を誹謗・中傷するような内容の書き込みは避け、マナーを守って使いましょう。
+    </p>
+    <p>
+        「おはよう」「こんにちは」「こんばんは」のいずれかが含まれる投稿には、BOTちゃんが返事を返します。
+    </p>
+    <hr>
+
+    <div id='board'>
+        <p id='default'>
+            まだ書き込みはありません。
+        </p>
+    </div>
+    <input id="update" type="button" value="更新" style="position: relative; left: 100px;"/>
+    
+    <hr>
+    <form id='mes_form'>
+        <table id='mes_table'>
+            <tr>
+                <th>名前</th>
+                <td>
+                    <input id="namae" type="text" form="mes_form" value="名無しさん">
+                </td>
+            </tr>
+            <tr>
+                <th>メッセージ</th>
+                <td>
+                    <textarea id="message" rows="4" cols="40" form="mes_form"
+                            placeholder="投稿したいメッセージを入力してください。"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>オプション</th>
+                <td>
+                    <label><input name = "option" type="checkbox" value="big"  form="mes_form"/>文字を大きくする</label>
+                    <label><input name = "option" type="checkbox" value="bold"  form="mes_form"/>太字</label>
+                    <label><input name = "option" type="checkbox" value="ita"  form="mes_form"/>斜体</label>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td align="right">
+                    <label id="error" for="send" style="color: red;"></label>
+                    <input id="send" type="button" value="投稿"  form="mes_form"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <br>
+    <footer>
+        <p>
+            written by jx19082 Akari Katsuma, January 2021.
+        </p>
+        <p>
+            このページにはフリー素材を使用しています。これらの二次配布、無断利用は禁じます。<br>
+            ヘッダ画像 - <a href='https://pixabay.com/ja/'>Pixabay</a> MIH83様<br>
+            　効果音 - <a href='https://on-jin.com/'>On-Jin ～音人～</a><br>
+        </p>
+    </footer>
+
+    <script type="text/javascript" src="Board.js"></script>
+</body>
+
+</html>
