@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">
+    {% block pageTitle %}
+    <title>デフォルト名</title>
+    {% endblock %}
+</head>
+
+<body>
+    <header>
+        <h1 class="headline">
+            <span>Django掲示板</span>
+        </h1>
+    </header>
+
+    {% block main %}
+    コンテンツがありません。
+    {% endblock %}
+
+    <br>
+    <footer>
+        <p>
+            written by Akari Katsuma, November 2021.
+        </p>
+        <p>
+            このサイトにはフリー素材を使用しています。これらの二次配布、無断利用は禁じます。<br>
+            ヘッダ画像 - <a href='https://pixabay.com/ja/'>Pixabay</a> MIH83様<br>
+            　効果音 - <a href='https://on-jin.com/'>On-Jin ～音人～</a><br>
+        </p>
+    </footer>
+
+    <script type="text/javascript" src="Board.js"></script>
+</body>
+
+</html>
