@@ -79,4 +79,4 @@ class Post(models.Model):
         blank=True)
 
     def __str__(self):
-        return self.created
+        return str(self.id)
