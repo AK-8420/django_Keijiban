@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load humanize %}
 
 
 {% block pageTitle %}
@@ -7,56 +8,30 @@
 
 {% block main %}
 <p>
-    当掲示板へようこそ。<br>
+    当掲示板へようこそ！<br>
     特定の個人や団体を誹謗・中傷するような内容の書き込みは避け、マナーを守って使いましょう。
 </p>
-<p>
-    「おはよう」「こんにちは」「こんばんは」のいずれかが含まれる投稿には、BOTちゃんが返事を返します。
-</p>
 <hr>
 <p>
-    今日の日付は{{ date }}です。
+    {% now "Y年m月d日 H時i分" %}現在、{{ sum_thread | intcomma }}個のスレッドがあります。
 </p>
-
-<div id='board'>
-    <p id='default'>
-        まだ書き込みはありません。
-    </p>
-</div>
-<input id="update" type="button" value="更新" style="position: relative; left: 100px;"/>
-
-<hr>
-<form id='mes_form'>
-    <table id='mes_table'>
-        <tr>
-            <th>名前</th>
-            <td>
-                <input id="namae" type="text" form="mes_form" value="名無しさん">
-            </td>
-        </tr>
-        <tr>
-            <th>メッセージ</th>
-            <td>
-                        <textarea id="message" rows="4" cols="40" form="mes_form"
-                                  placeholder="投稿したいメッセージを入力してください。"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <th>オプション</th>
-            <td>
-                <label><input name = "option" type="checkbox" value="big"  form="mes_form"/>文字を大きくする</label>
-                <label><input name = "option" type="checkbox" value="bold"  form="mes_form"/>太字</label>
-                <label><input name = "option" type="checkbox" value="ita"  form="mes_form"/>斜体</label>
-            </td>
-        </tr>
-        <tr>
-            <th></th>
-            <td align="right">
-                <label id="error" for="send" style="color: red;"></label>
-                <input id="send" type="button" value="投稿"  form="mes_form"/>
-            </td>
-        </tr>
-    </table>
-</form>
-
+<h2>スレッド一覧</h2>
+<span>
+    カテゴリ
+    <div class="navbar">
+        {% for name in category %}
+        <a href="URL/{{ name }}}">{{ name }}(0)</a>　
+        {% empty %}
+        カテゴリはありません。
+        {% endfor %}
+    </div>
+</span>
+ここに検索フォーム
+<table id='index_table'>
+    <tr><th>カテゴリ</th><th>タイトル</th><th>作成者</th><th>投稿数</th><th>閲覧回数</th><th>最終更新日</th></tr>
+    <tr><td>A-1</td><td>B-1</td><td>C-1</td><td>D-1</td><td>E-1</td></tr>
+    <tr><td>A-2</td><td>B-2</td><td>C-2</td><td>D-2</td></tr>
+    <tr><td>A-3</td><td>B-3</td><td>C-3</td><td>D-3</td></tr>
+    <tr><td>A-4</td><td>B-4</td><td>C-4</td><td>D-4</td></tr>
+</table>
 {% endblock %}

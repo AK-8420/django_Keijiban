@@ -6,5 +6,14 @@ class BoardPage(TemplateView):
 
     def get_context_data(self):
         ctxt = super().get_context_data()
-        ctxt["date"] = datetime.date.today()
+        ctxt["sum_thread"] = 11111111111
+        ctxt["category"] = {
+            "雑談",
+            "質問",
+            "その他",
+        }
         return ctxt
+
+
+class Thread(TemplateView):
+    template_name = "Thread.html"

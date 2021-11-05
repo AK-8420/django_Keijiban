@@ -14,10 +14,6 @@ h1.headline span{
   background:rgba(255,255,240,0.75);
 }
 
-body p,form {
-  padding: 0px 100px;
-}
-
 footer {
   width: 100%;
   height: 120px; 
@@ -59,6 +55,16 @@ textarea:focus {
 
 #mes_table{
   width: 600px;
+  border-collapse:collapse;
+  margin:0 auto;
+}
+#mes_table td,th{
+  border:1px solid #ccc;
+  padding:10px;
+}
+#mes_table th{
+  border-left:5px solid #005ab3;
+  color:#005ab3;
 }
 
 #send {
@@ -69,7 +75,8 @@ textarea:focus {
   text-decoration: none;
   color: white;
   font-size: 16px;
-  outline:none
+  outline:none;
+  text-align: center;
 }
 #send:hover {
   box-shadow: 0 0 8px 0 lightblue;
@@ -89,4 +96,19 @@ span.h{
 .op_ita{
   font-family: "ＭＳ ゴシック";
   font-style: oblique;
+}
+
+#index_table{
+  border-collapse:collapse;
+  margin:0 auto;
+}
+#index_table td,th{
+  padding:10px;
+}
+#index_table th{
+  color:#fff;
+  background:#005ab3;
+}
+#index_table tr:nth-child(odd){
+  background:#e6f2ff;
 }
