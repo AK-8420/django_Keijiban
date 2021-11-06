@@ -3,6 +3,7 @@ from .models import Category, Thread, Tag, Post
 from django import forms
 from django.utils import timezone
 from ipware import get_client_ip
+from .functions import get_ipID
 
 
 class Index(ListView):
@@ -67,8 +68,9 @@ class Create(CreateView):
         t = form.save()
         # IPアドレスの取得　参考：https://qiita.com/3244/items/0b47d3ad91968fe15eb9
         client_addr, is_routable = get_client_ip(self.request, request_header_order=['X_FORWARDED_FOR', 'REMOTE_ADDR'])
-        Post.objects.create(
+        p = Post.objects.create(
             IPaddress = client_addr,
+            ipID = get_ipID.hashing(client_addr),
             created = timezone.now(),
             name = form.data.get('name'),
             body = form.data.get('body'),

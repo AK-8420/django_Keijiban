@@ -1,5 +1,4 @@
 {% extends "_base.html" %}
-{% load Myfunc %}
 
 
 {% block pageTitle %}
@@ -22,12 +21,15 @@
 <div id='board'>
     {% for p in object.post_set.all %}
     <p>
-        {{ forloop.counter }}：{{ p.name }} ID:{{ p | hashing }}
+        {{ forloop.counter }}：{{ p.name }} ID:{{ p.ipID }}
     </p>
     <p>
         {{ p.body }}
     </p>
     <p>
+        {{ p.tag_set.all }}
+    </p>
+    <p style="text-align: right;">
         {{ p.created }}
     </p>
     <hr>

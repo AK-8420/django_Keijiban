@@ -4,9 +4,9 @@ from django.urls import reverse_lazy
 
 class Category(models.Model):
     name = models.CharField(
-        max_length=255,
+        max_length=3,
         blank=False,
-        null=False,)
+        null=False)
 
     def __str__(self):
         return self.name
@@ -49,6 +49,12 @@ class Post(models.Model):
     IPaddress = models.GenericIPAddressField(
         blank=False,
         null=False)
+
+    ipID = models.CharField(
+        max_length=8,
+        blank=True,
+        null=True,
+        default="xxxxxxxx")
 
     created = models.DateTimeField(
         auto_now_add=True,
