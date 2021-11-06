@@ -8,6 +8,10 @@ from ipware import get_client_ip
 class Index(ListView):
     model = Thread
 
+
+class CategoryView(ListView):
+    model = Thread
+
 #    def get_queryset(self):
 #        return Thread.object.filter()
 
