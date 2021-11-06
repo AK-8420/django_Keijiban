@@ -4,9 +4,10 @@ pythonのフレームワークであるdjangoを使った掲示板サイト(未�
 https://django-keijiban.herokuapp.com/
 
 ## 使用ライブラリ
-django
-whitenoise
-gunicorn
+django<br>
+whitenoise<br>
+gunicorn<br>
+django-ipware<br>
 
 ## サーバ
 Heroku
