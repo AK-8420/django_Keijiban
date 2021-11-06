@@ -22,7 +22,7 @@
 <div id='board'>
     {% for p in object.post_set.all %}
     <p>
-        {{ forloop.counter }}、{{ p.name }}、{{ p.created|localize }}、{{ p.IPaddress }}
+        {{ forloop.counter }}、{{ p.name }}、{{ p.created }}、{{ p.IPaddress }}
     </p>
     <p>
         {{ p.body }}

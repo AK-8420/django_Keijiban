@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Category, Thread, Tag, Post
 from django import forms
+from django.utils import timezone
 
 
 class Index(ListView):
@@ -39,28 +40,25 @@ class PostForm(forms.ModelForm):
            ]
 
 class Create(CreateView):
-   model = Thread
-   form_class = ThreadForm
-   form_class2 = PostForm
+    model = Thread
+    form_class = ThreadForm
+    form_class2 = PostForm
 
-   def get_context_data(self, **kwargs):
-       context= CreateView.get_context_data(self, **kwargs)
-       form = self.form_class(self.request.GET or None)
-       form2 = self.form_class2(self.request.GET or None)
-       context.update({'form':form})
-       context.update({'form2':form2})
-       return context
+    def get_context_data(self, **kwargs):
+        context= CreateView.get_context_data(self, **kwargs)
+        form = self.form_class(self.request.GET or None)
+        form2 = self.form_class2(self.request.GET or None)
+        context.update({'form':form})
+        context.update({'form2':form2})
+        return context
 
-   def form_valid(self, form):
-        # form.cleaned_dataにフォームの入力内容が入っています
-       data = form.cleaned_data
-       text = data["text"]
-       search = data["search"]
-       replace = data["replace"]
-
-       # ここで変換
-       new_text = text.replace(search, replace)
-
-       # テンプレートに渡す
-       ctxt = self.get_context_data(new_text=new_text, form=form)
-       return self.render_to_response(ctxt)
+    def form_valid(self, form):
+        t = form.save()
+        Post.objects.create(
+            IPaddress = "127.0.0.1",
+            created = timezone.now(),
+            name = form.data.get('name'),
+            body = form.data.get('body'),
+            thread=t,
+            )
+        return CreateView.form_valid(self, form)
