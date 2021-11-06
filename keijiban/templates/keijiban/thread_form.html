@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+
+
+{% block pageTitle %}
+<title>新規スレッド作成 - Django掲示板</title>
+{% endblock %}
+
+{% block breadcrumb %}
+<nav style="--bs-breadcrumb-divider: '>'; background-color: #B7BCBF;" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">新規スレッド作成</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block main %}
+<h2>新規スレッド作成</h2>
+<form method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        {{ form2.as_table }}
+        <tr><td></td><td><input type="submit" value="投稿" class="btn text-light" style="background:#4B4A59;"/>
+            <a class="btn" type="submit" href="{% url 'index' %}" role="button"/>やめる</a></td></tr>
+    </table>
+</form>
+{% endblock %}
