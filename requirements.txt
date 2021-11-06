@@ -1,8 +1,4 @@
 django
 whitenoise
-<<<<<<< HEAD
-gunicorn
-=======
 gunicorn
 django-ipware
->>>>>>> develop
