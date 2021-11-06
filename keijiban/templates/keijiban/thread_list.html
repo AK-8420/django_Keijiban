@@ -1,11 +1,11 @@
-{% extends "keijiban/base.html" %}
+{% extends "_base.html" %}
 {% load humanize %}
 {% load static %}
 
 
 {% block pageTitle %}
-<link rel="stylesheet" type="text/css" href="{% static 'indexTable.css' %}">
-<title>Django掲示板 トップ</title>
+<link rel="stylesheet" type="text/css" href="{% static 'scss/indexTable.css' %}">
+<title>Django掲示板トップ</title>
 {% endblock %}
 
 {% block main %}
@@ -18,12 +18,16 @@
     {% now "Y年m月d日 H時i分" %}現在、{{ sum_thread | intcomma }}個のスレッドがあります。
 </p>
 <h3>スレッド一覧</h3>
-<table id='index_table'>
-    <tr><th>タイトル</th><th>作成者</th><th>投稿数</th><th>閲覧回数</th><th>最終更新日</th></tr>
-    <tr><td><span class="badge rounded-pill text-t1 border border-t1 badge-outlined">雑談</span> A-1</td><td>B-1</td><td>C-1</td><td>D-1</td><td>E-1</td></tr>
-    <tr><td><span class="badge rounded-pill text-secondary border border-secondary badge-outlined">質問</span> A-2</td><td>B-2</td><td>C-2</td><td>D-2</td></tr>
-    <tr><td>A-3</td><td>B-3</td><td>C-3</td><td>D-3</td></tr>
-    <tr><td>A-4</td><td>B-4</td><td>C-4</td><td>D-4</td></tr>
+    {% if object_list  %}
+        <table id='index_table'>
+            <tr><th>タイトル</th><th>作成者</th><th>返信数</th><th>閲覧回数</th><th>最終更新</th></tr>
+        {% for t in object_list %}
+            <tr><td><span class="badge rounded-pill text-theme1 border border-theme1 badge-outlined">雑談</span><a href="#"> {{ t.title }}</a></td><td>{{ t.creator }}</td><td>0</td><td>{{ t.view }}</td><td>{% now "Y年m月d日 H時i分" %}</td></tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>まだスレッドはありません。新しいスレッドを作りませんか？</p>
+    {% endif %}
 </table>
 
 <br>

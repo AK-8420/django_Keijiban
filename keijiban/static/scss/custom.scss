@@ -4,17 +4,8 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-$theme-colors: (
-        "primary":    $primary,
-        "secondary":  $secondary,
-        "success":    $success,
-        "info":       $info,
-        "warning":    $warning,
-        "danger":     $danger,
-        "light":      $light,
-        "dark":       $dark,
-        "t1":       #AA8279
-);
+
+$link-color: #FF0000;
 
 .badge.badge-outlined {
   background-color:transparent
@@ -22,15 +13,20 @@ $theme-colors: (
 
 // scss-docs-start import-stack
 // Configuration
-@import "functions";
-@import "variables";
-@import "mixins";
-@import "utilities";
+@import "../bootstrap/scss/functions";
+@import "../bootstrap/scss/variables";
+@import "../bootstrap/scss/mixins";
+@import "../bootstrap/scss/utilities";
 
 // Layout & components
-@import "root";
-@import "reboot";
-@import "navbar";
-@import "breadcrumb";
-@import "pagination";
-@import "badge";
+@import "../bootstrap/scss/root";
+@import "../bootstrap/scss/reboot";
+@import "../bootstrap/scss/navbar";
+@import "../bootstrap/scss/breadcrumb";
+@import "../bootstrap/scss/pagination";
+@import "../bootstrap/scss/badge";
+
+$custom-colors: (
+        "theme1": #AA8279
+);
+$theme-colors: map-merge($theme-colors, $custom-colors);

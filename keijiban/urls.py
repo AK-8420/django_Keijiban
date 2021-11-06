@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import BoardPage, Thread
+from .views import Index, ThreadView
 
 urlpatterns = [
-    path('', BoardPage.as_view()),
-    path('thread/', Thread.as_view()),
+    path('', Index.as_view()),
+    path('thread/', ThreadView.as_view()),
 ]
