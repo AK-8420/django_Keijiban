@@ -1,0 +1,63 @@
+{% extends "_base.html" %}
+{% load l10n %}
+
+
+{% block pageTitle %}
+<title>{{ object.title }} - Django掲示板</title>
+{% endblock %}
+
+{% block breadcrumb %}
+<nav style="--bs-breadcrumb-divider: '>'; background-color: #B7BCBF;" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+        <li class="breadcrumb-item"><a href="/">{{ object.category }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ object.title }}</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block main %}
+<h2>{{ object.title }}</h2>
+<hr>
+<div id='board'>
+    {% for p in object.post_set.all %}
+    <p>
+        {{ forloop.counter }}、{{ p.name }}、{{ p.created }}、{{ p.IPaddress }}
+    </p>
+    <p>
+        {{ p.body }}
+    </p>
+    {% empty %}
+    <p>書き込みがありません。</p>
+    {% endfor %}
+</div>
+<input id="update" type="button" value="更新"/>
+
+<form id='mes_form'>
+    <table id='mes_table'>
+        <tr>
+            <th>名前</th>
+            <td>
+                <input id="namae" type="text" form="mes_form" value="名無しさん">
+            </td>
+        </tr>
+        <tr>
+            <th>メッセージ</th>
+            <td>
+                        <textarea id="message" rows="4" cols="40" form="mes_form"
+                                  placeholder="投稿したいメッセージを入力してください。"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <th>オプション</th>
+            <td>
+                <label><input name = "option" type="checkbox" value="big"  form="mes_form"/>文字を大きくする</label>
+                <label><input name = "option" type="checkbox" value="bold"  form="mes_form"/>太字</label>
+                <label><input name = "option" type="checkbox" value="ita"  form="mes_form"/>斜体</label>
+            </td>
+        </tr>
+    </table>
+    <label id="error" for="send" style="color: red;"></label><br>
+    <input id="send" type="button" value="投稿"  form="mes_form"/>
+</form>
+{% endblock %}
