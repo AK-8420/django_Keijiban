@@ -11,6 +11,7 @@ class Index(ListView):
 
 class CategoryView(ListView):
     model = Thread
+#    template_name = 'myapp/my_detail.html'
 
 #    def get_queryset(self):
 #        return Thread.object.filter()
@@ -18,6 +19,11 @@ class CategoryView(ListView):
 
 class ThreadView(DetailView):
     model = Thread
+
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['ipID'] = 'Hello, World!'
+        return context
 
 
 class ThreadForm(forms.ModelForm):

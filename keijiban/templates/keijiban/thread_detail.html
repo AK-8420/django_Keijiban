@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% load l10n %}
+{% load Myfunc %}
 
 
 {% block pageTitle %}
@@ -22,11 +22,15 @@
 <div id='board'>
     {% for p in object.post_set.all %}
     <p>
-        {{ forloop.counter }}、{{ p.name }}、{{ p.created }}、{{ p.IPaddress }}
+        {{ forloop.counter }}：{{ p.name }} ID:{{ p | hashing }}
     </p>
     <p>
         {{ p.body }}
     </p>
+    <p>
+        {{ p.created }}
+    </p>
+    <hr>
     {% empty %}
     <p>書き込みがありません。</p>
     {% endfor %}
