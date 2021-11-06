@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import Category, Thread, Tag, Post
 
 
@@ -16,5 +16,5 @@ class Index(ListView):
         return ctxt
 
 
-class ThreadView(ListView):
-    model = Post
+class ThreadView(DetailView):
+    model = Thread

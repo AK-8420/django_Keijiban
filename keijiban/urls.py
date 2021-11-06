@@ -3,5 +3,5 @@ from .views import Index, ThreadView
 
 urlpatterns = [
     path('', Index.as_view()),
-    path('thread/', ThreadView.as_view()),
+    path('threads/<pk>/', ThreadView.as_view()),
 ]

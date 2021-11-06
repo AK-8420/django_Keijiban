@@ -3,28 +3,29 @@
 
 
 {% block pageTitle %}
-<title>{{ object_list.first.name }} - Django掲示板</title>
+<title>{{ object.title }} - Django掲示板</title>
 {% endblock %}
 
 {% block breadcrumb %}
 <nav style="--bs-breadcrumb-divider: '>'; background-color: #B7BCBF;" aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
+        <li class="breadcrumb-item"><a href="/">{{ object.category }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ object.title }}</li>
     </ol>
 </nav>
 {% endblock %}
 
 {% block main %}
-<h2>ここにタイトル{{ object_list.first.name }}</h2>
+<h2>{{ object.title }}</h2>
 <hr>
 <div id='board'>
     <p id='default'>
         まだ書き込みはありません。
     </p>
-    {% for p in object_list %}
+    {% for p in object.post_set.all %}
     <p>
-        {{ p.id }}、{{ p.name }}、{{ p.created|localize }}、{{ p.IPaddress }}
+        {{ forloop.counter }}、{{ p.name }}、{{ p.created|localize }}、{{ p.IPaddress }}
     </p>
     <p>
         {{ p.body }}

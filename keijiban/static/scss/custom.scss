@@ -11,20 +11,7 @@ $link-color: #FF0000;
   background-color:transparent
 }
 
-// scss-docs-start import-stack
-// Configuration
-@import "../bootstrap/scss/functions";
-@import "../bootstrap/scss/variables";
-@import "../bootstrap/scss/mixins";
-@import "../bootstrap/scss/utilities";
-
-// Layout & components
-@import "../bootstrap/scss/root";
-@import "../bootstrap/scss/reboot";
-@import "../bootstrap/scss/navbar";
-@import "../bootstrap/scss/breadcrumb";
-@import "../bootstrap/scss/pagination";
-@import "../bootstrap/scss/badge";
+@import "../bootstrap/scss/bootstrap";
 
 $custom-colors: (
         "theme1": #AA8279
