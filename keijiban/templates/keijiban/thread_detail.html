@@ -9,7 +9,7 @@
 {% block breadcrumb %}
 <nav style="--bs-breadcrumb-divider: '>'; background-color: #B7BCBF;" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
         <li class="breadcrumb-item"><a href="/">{{ object.category }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ object.title }}</li>
     </ol>
@@ -20,9 +20,6 @@
 <h2>{{ object.title }}</h2>
 <hr>
 <div id='board'>
-    <p id='default'>
-        まだ書き込みはありません。
-    </p>
     {% for p in object.post_set.all %}
     <p>
         {{ forloop.counter }}、{{ p.name }}、{{ p.created|localize }}、{{ p.IPaddress }}
@@ -30,6 +27,8 @@
     <p>
         {{ p.body }}
     </p>
+    {% empty %}
+    <p>書き込みがありません。</p>
     {% endfor %}
 </div>
 <input id="update" type="button" value="更新"/>

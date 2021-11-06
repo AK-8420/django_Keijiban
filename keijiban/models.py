@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 
 class Category(models.Model):
@@ -17,12 +18,6 @@ class Thread(models.Model):
         null=False,
         default="無題")
 
-    creator = models.CharField(
-        max_length=15,
-        blank=True,
-        null=True,
-        default="名無しさん")
-
     view = models.IntegerField(
         blank=True,
         null=False,
@@ -36,6 +31,8 @@ class Thread(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse_lazy("thread", args=[self.id])
 
 class Tag(models.Model):
     type = models.CharField(

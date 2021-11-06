@@ -13,32 +13,30 @@
     当掲示板へようこそ！<br>
     特定の個人や団体を誹謗・中傷するような内容の書き込みは避け、マナーを守って使いましょう。
 </p>
+<div>
+    {% now "Y年m月d日H時i分" %}現在、{{ object_list | length | intcomma }}個のスレッドがあります。<br>
+    <a class="btn" style="background:#f2ede8; color:#4B4A59; border: 1px solid #AA8279;" href="{% url 'create' %}" role="button">スレッドを作成する</a><br>
+</div>
 <hr>
-<p>
-    {% now "Y年m月d日H時i分" %}現在、{{ object_list | length | intcomma }}個のスレッドがあります。
-</p>
 <h3>スレッド一覧</h3>
-    {% if object_list  %}
-        {% for t in object_list %}
-            <div class="card" style="width: 18rem;">
-                <div class="card-body" style="background:#f2ede8;">
-                    <a href="/threads/{{t.id}}/">
-                    <h5 class="card-title">{{ t.title }}</h5>
-                    </a>
-                    <h6 class="card-subtitle mb-2 text-muted">作成者 {{ t.creator }}</h6>
-                    <p class="card-text">最終更新 {{ t.post_set.first.created | naturaltime }}</p>
-                </div>
-                <div class="card-footer" style="display: flex;justify-content: space-between; background:#f2ede8; color:gray;">
-                    <span class="badge rounded-pill text-info  border border-info badge-outlined">{{t.category}}</span>{{t.view| intcomma }} view　{{t.post_set.all| length | add:"-1"}} replies
-                </div>
-            </div>
-            <br>
-        {% endfor %}
-    {% else %}
-        <p>まだスレッドはありません。新しいスレッドを作りませんか？</p>
-    {% endif %}
-
+{% for t in object_list %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body" style="background:#f2ede8;">
+        <a href="{% url 'thread' t.id %}">
+            <h5 class="card-title">{{ t.title }}</h5>
+        </a>
+        <h6 class="card-subtitle mb-2 text-muted">作成者 {{ t.post_set.first.name }}</h6>
+        <p class="card-text">最終更新 {{ t.post_set.last.created | naturaltime }}</p>
+    </div>
+    <div class="card-footer" style="display: flex;justify-content: space-between; background:#f2ede8; color:#AA8279;">
+        <span class="badge rounded-pill text-info  border border-info badge-outlined">{{t.category}}</span>{{t.view| intcomma }} view　{{t.post_set.all| length | add:"-1"}} replies
+    </div>
+</div>
 <br>
+{% empty %}
+<p>まだスレッドはありません。新しいスレッドを作りませんか？</p>
+{% endfor %}
+
 <nav aria-label="...">
     <ul class="pagination">
         <li class="page-item disabled">
