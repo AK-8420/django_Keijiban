@@ -1,0 +1,19 @@
+/*!
+ * Bootstrap v5.0.0-beta1 (https://getbootstrap.com/)
+ * Copyright 2011-2020 The Bootstrap Authors
+ * Copyright 2011-2020 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+
+$link-color: #FF0000;
+
+.badge.badge-outlined {
+  background-color:transparent
+}
+
+@import "../bootstrap/scss/bootstrap";
+
+$custom-colors: (
+        "theme1": #AA8279
+);
+$theme-colors: map-merge($theme-colors, $custom-colors);
