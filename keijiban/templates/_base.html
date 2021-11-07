@@ -1,4 +1,5 @@
 {% load static %}
+{% load Myfunc %}
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -29,10 +30,12 @@
                                 カテゴリー
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{% url 'category' 1 %}">雑談</a></li>
-                                <li><a class="dropdown-item" href="#">質問</a></li>
+                                {% for c in getCategory_list %}
+                                <li><a class="dropdown-item" href="{% url 'category' c.pk %}">{{ c.name }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">その他</a></li>
+                                {% empty %}
+                                <li><a class="dropdown-item disabled" tabindex="-1" aria-disabled="true">カテゴリがありません</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
                         <li class="nav-item">

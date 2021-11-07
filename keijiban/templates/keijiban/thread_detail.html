@@ -16,6 +16,7 @@
 {% endblock %}
 
 {% block main %}
+{% autoescape on %}
 <h2>{{ object.title }}</h2>
 <hr>
 <div id='board'>
@@ -27,7 +28,10 @@
         {{ p.body }}
     </p>
     <p>
-        {{ p.created }}
+        {{ p.tag_set.all }}
+    </p>
+    <p style="text-align: right">
+        {{ p.created | date:"Y/m/d H:i:s" }}
     </p>
     <hr>
     {% empty %}
@@ -63,4 +67,5 @@
     <label id="error" for="send" style="color: red;"></label><br>
     <input id="send" type="button" value="投稿"  form="mes_form"/>
 </form>
+{% endautoescape %}
 {% endblock %}
