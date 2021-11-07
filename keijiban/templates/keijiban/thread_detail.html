@@ -38,34 +38,25 @@
     <p>書き込みがありません。</p>
     {% endfor %}
 </div>
-<input id="update" type="button" value="更新"/>
 
-<form id='mes_form'>
-    <table id='mes_table'>
-        <tr>
-            <th>名前</th>
-            <td>
-                <input id="namae" type="text" form="mes_form" value="名無しさん">
-            </td>
-        </tr>
-        <tr>
-            <th>メッセージ</th>
-            <td>
-                        <textarea id="message" rows="4" cols="40" form="mes_form"
-                                  placeholder="投稿したいメッセージを入力してください。"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <th>オプション</th>
-            <td>
-                <label><input name = "option" type="checkbox" value="big"  form="mes_form"/>文字を大きくする</label>
-                <label><input name = "option" type="checkbox" value="bold"  form="mes_form"/>太字</label>
-                <label><input name = "option" type="checkbox" value="ita"  form="mes_form"/>斜体</label>
-            </td>
-        </tr>
-    </table>
-    <label id="error" for="send" style="color: red;"></label><br>
-    <input id="send" type="button" value="投稿"  form="mes_form"/>
+<input class="btn" style="background:transparent; color:#4B4A59; border: 1px solid #AA8279;" type="reset" value="更新">
+
+<br><br><br>
+<h3>スレッドに返信する</h3>
+{% for error in form.non_field_errors %}
+<div class="alert alert-danger" role="alert">
+    {{ error }}
+</div>
+{% endfor %}
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <p>
+        <label>{{ field.label }}</label>
+        {{ field }}
+    </p>
+    {% endfor %}
+    <input class="btn text-light" style="background: #AA8279" type="submit" value="投稿">
 </form>
 {% endautoescape %}
 {% endblock %}

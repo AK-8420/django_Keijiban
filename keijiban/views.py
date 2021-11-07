@@ -1,9 +1,10 @@
 from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic.edit import FormView
 from .models import Thread, Category, Tag, Post
-from django import forms
 from django.utils import timezone
 from ipware import get_client_ip
 from .functions import get
+from .forms import ThreadForm, PostForm
 
 
 class Index(ListView):
@@ -21,31 +22,26 @@ class CategoryView(DetailView):
 class ThreadView(DetailView):
     model = Thread
 
+    def get_context_data(self, **kwargs):
+        context= ThreadView.get_context_data(self, **kwargs)
+        form = self.form_class(self.request.GET or None)
+        context.update({'form':form})
+        return context
+
+    def form_valid(self, form):
+        # IPアドレスの取得　参考：https://qiita.com/3244/items/0b47d3ad91968fe15eb9
+        client_addr, is_routable = get_client_ip(self.request, request_header_order=['X_FORWARDED_FOR', 'REMOTE_ADDR'])
+        Post.objects.create(
+            IPaddress = client_addr,
+            ipID = get.hashing(client_addr),
+            created = timezone.now(),
+            name = form.data.get('name'),
+            body = form.data.get('body'),
+            thread=self.request.pk,
+            )
+        return ThreadView.form_valid(self, form)
 
 
-class ThreadForm(forms.ModelForm):
-   class Meta:
-       model = Thread
-       fields=(
-           'category',
-           'title',
-           )
-       labels ={
-           'category':'カテゴリ',
-           'title':'タイトル',
-       }
-
-class PostForm(forms.ModelForm):
-   class Meta:
-       model=Post
-       fields =(
-           'name',
-           'body',
-           )
-       labels= {
-           'name':'名前',
-           'body':'投稿内容',
-       }
 
 class Create(CreateView):
     model = Thread
@@ -66,7 +62,7 @@ class Create(CreateView):
         client_addr, is_routable = get_client_ip(self.request, request_header_order=['X_FORWARDED_FOR', 'REMOTE_ADDR'])
         Post.objects.create(
             IPaddress = client_addr,
-            ipID = get.hacshing(client_addr),
+            ipID = get.hashing(client_addr),
             created = timezone.now(),
             name = form.data.get('name'),
             body = form.data.get('body'),
