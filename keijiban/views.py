@@ -1,30 +1,26 @@
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Category, Thread, Tag, Post
+from .models import Thread, Category, Tag, Post
 from django import forms
 from django.utils import timezone
 from ipware import get_client_ip
-from .functions import get_ipID
+from .functions import get
 
 
 class Index(ListView):
     model = Thread
+    paginated_by = 10
 
 
-class CategoryView(ListView):
-    model = Thread
-#    template_name = 'myapp/my_detail.html'
+class CategoryView(DetailView):
+    model = Category
 
-#    def get_queryset(self):
-#        return Thread.object.filter()
+    def get_query_set():
+        return Category.objects.all().filter(pk = thread__category)
 
 
 class ThreadView(DetailView):
     model = Thread
 
-    def get_context_data(self, **kwargs):
-        context= super().get_context_data(**kwargs)
-        context['ipID'] = 'Hello, World!'
-        return context
 
 
 class ThreadForm(forms.ModelForm):
@@ -68,9 +64,9 @@ class Create(CreateView):
         t = form.save()
         # IPアドレスの取得　参考：https://qiita.com/3244/items/0b47d3ad91968fe15eb9
         client_addr, is_routable = get_client_ip(self.request, request_header_order=['X_FORWARDED_FOR', 'REMOTE_ADDR'])
-        p = Post.objects.create(
+        Post.objects.create(
             IPaddress = client_addr,
-            ipID = get_ipID.hashing(client_addr),
+            ipID = get.hacshing(client_addr),
             created = timezone.now(),
             name = form.data.get('name'),
             body = form.data.get('body'),

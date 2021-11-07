@@ -2,7 +2,7 @@ from django.utils import timezone
 from .models import Thread, Post
 import hashlib
 
-class get_ipID:
+class get:
     def hashing(ip):
         date = timezone.localdate(timezone.now())#現在の日付
         secret = "Omoti_Daisuki_himitu_dayo" #秘密の文字列

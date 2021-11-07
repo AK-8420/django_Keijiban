@@ -9,7 +9,7 @@
 <nav style="--bs-breadcrumb-divider: '>'; background-color: #B7BCBF;" aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
-        <li class="breadcrumb-item"><a href="/">{{ object.category }}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'category' object.category.id %}">{{ object.category }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ object.title }}</li>
     </ol>
 </nav>
@@ -27,9 +27,6 @@
         {{ p.body }}
     </p>
     <p>
-        {{ p.tag_set.all }}
-    </p>
-    <p style="text-align: right;">
         {{ p.created }}
     </p>
     <hr>

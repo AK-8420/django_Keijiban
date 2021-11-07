@@ -19,38 +19,39 @@
 </div>
 <hr>
 <h3>スレッド一覧</h3>
-作成日時順<br>
-{% for t in object_list %}
-<div class="card" style="width: 18rem;">
-    <div class="card-body" style="background:#f2ede8;">
-        <a href="{% url 'thread' t.id %}">
-            <h5 class="card-title">{{ t.title }}</h5>
-        </a>
-        <h6 class="card-subtitle mb-2 text-muted">作成者 {{ t.post_set.first.name }}</h6>
-        <p class="card-text">最終更新 {{ t.post_set.last.created | naturaltime }}</p>
+{% if object_list %}
+    作成日時順<br>
+    {% for t in object_list %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body" style="background:#f2ede8;">
+            <a href="{% url 'thread' t.id %}">
+                <h5 class="card-title">{{ t.title }}</h5>
+            </a>
+            <h6 class="card-subtitle mb-2 text-muted">作成者 {{ t.post_set.first.name }}</h6>
+            <p class="card-text">最終更新 {{ t.post_set.last.created | naturaltime }}</p>
+        </div>
+        <div class="card-footer" style="display: flex;justify-content: space-between; background:#f2ede8; color:#AA8279;">
+            <span class="badge rounded-pill text-info  border border-info badge-outlined">{{t.category}}</span>{{t.view| intcomma }} view　{{t.post_set.all| length | add:"-1"}} replies
+        </div>
     </div>
-    <div class="card-footer" style="display: flex;justify-content: space-between; background:#f2ede8; color:#AA8279;">
-        <span class="badge rounded-pill text-info  border border-info badge-outlined">{{t.category}}</span>{{t.view| intcomma }} view　{{t.post_set.all| length | add:"-1"}} replies
-    </div>
-</div>
-<br>
-{% empty %}
-<p>まだスレッドはありません。新しいスレッドを作りませんか？</p>
-{% endfor %}
-
-<nav aria-label="...">
-    <ul class="pagination">
-        <li class="page-item disabled">
-            <span class="page-link" href="#" tabindex="-1" aria-disabled="true">前へ</span>
-        </li>
-        <li class="page-item active" aria-current="page">
-            <span class="page-link" style="background-color: #AA8279; border-color: #AA8279;" href="#">1</span>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">次へ</a>
-        </li>
-    </ul>
-</nav>
+    <br>
+    {% endfor %}
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <span class="page-link" href="#" tabindex="-1" aria-disabled="true">前へ</span>
+            </li>
+            <li class="page-item active" aria-current="page">
+                <span class="page-link" style="background-color: #AA8279; border-color: #AA8279;" href="#">1</span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">次へ</a>
+            </li>
+        </ul>
+    </nav>
+{% else %}
+    <p>まだスレッドはありません。新しいスレッドを作りませんか？</p>
+{% endif %}
 {% endblock %}
