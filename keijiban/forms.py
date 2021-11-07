@@ -1,6 +1,5 @@
 from django import forms
-from . import models
-from django.core.exceptions import ValidationError
+from .models import Thread, Post
 
 widget_textarea = forms.Textarea(
     attrs={
@@ -42,6 +41,5 @@ class PostForm(forms.ModelForm):
         }
 
 
-class ReplyForm(forms.Form):
+class SearchForm(forms.Form):
     name = forms.CharField(label="ニックネーム", widget=widget_textinput)
-    body = forms.CharField(label="投稿内容", widget=widget_textarea)
